@@ -2,6 +2,7 @@ contactList
   3 APIS to add and view contacts using:
    -NodeJs express framework
    -mongodb
+   -mochaFrameWork to test 3 APIS
 
 Getting started
 to run the project on your local machine follow the steps:
@@ -19,6 +20,11 @@ to run the project on your local machine follow the steps:
 
   3- To Run server :
      npm start
+
+  4-To Run mochaTest :
+     npm test
+
+
 
 Description of 3 APIS:
 
@@ -53,3 +59,5 @@ Description of 3 APIS:
              fingerPrint : String }
 
   auth.json file contains (auth,deviceToken,fingerPrint) used for authorizations           
+
+  test folder contain test.js to test 3 APIS using mochaRamework

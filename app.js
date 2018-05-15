@@ -35,6 +35,5 @@ server.use("/contacts", contactsRouter)
 //middleware to catch error URLS
 server.use(urlMid)
 
-server.listen(3000,function(){
-  console.log("start server in http at port 3000");
-});
+
+module.exports = server

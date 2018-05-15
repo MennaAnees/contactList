@@ -4,7 +4,6 @@ const validUsers = require('../auth');
 module.exports= function(req,resp,next){
   var flag=0;
   if(req.body.auth && req.body.deviceToken &&  req.body.fingerPrint){
-    console.log("hii");
     validUsers.forEach(function(value){
       if(req.body.auth === value.auth &&
          req.body.deviceToken === value.deviceToken

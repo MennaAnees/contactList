@@ -8,7 +8,7 @@ const contacts = new Schema(
 {
   email:{
     type:String,
-    required:true,
+    required:[true, "Please Enter The EMAIL"],
     validate: {
             validator : (email) => validator.isEmail(email),
             message : "NOT VALID EMAIL."
@@ -20,6 +20,8 @@ const contacts = new Schema(
             validator: (mobile) => validator.isMobilePhone(mobile, 'any'),
             message : "NOT VALID MOBILE NUMBER."
         },
+  required:[true, "Please Enter The Mobile Number"]
+
   },
   firstName:{
     type:String,
@@ -27,7 +29,7 @@ const contacts = new Schema(
             validator: (firstName) => validator.isAlpha(firstName),
             message : "ONLY ALPHABETICAL ALLOWED."
         },
-    required:true
+    required:[true, "Please Enter The First Name"]
   },
   lastName:{
     type:String,
@@ -39,7 +41,7 @@ const contacts = new Schema(
   },
   userId:{
     type:Number,
-    required:true,
+    required:[true, "Please Enter The last Name"]
   },
    createdAt: { type: Date,
             default: Date.now
