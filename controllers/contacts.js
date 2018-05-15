@@ -1,24 +1,11 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var router = express.Router();
-// var ProductsModel = mongoose.model("products");
-var bodyParser = require("body-parser");
-var urlEncodedMid = bodyParser.urlencoded({
-  extended: true
-});
-var JSONParsermid = bodyParser.json();
-
 var ContactsModel = require("../models/contacts");
 
 
-
-router.get("/", function (request, response) {
-  console.log(" / route " );
-  response.send("Home");
-});
-
 //1st API "ADD NEW CONTACT"...
-router.post("/addContact", JSONParsermid, function (req, resp) {
+router.post("/addContact",function (req, resp) {
   ContactsModel.checkContact(req.body)
   .then((data)=>{
      if(data.length === 0){
@@ -29,7 +16,6 @@ router.post("/addContact", JSONParsermid, function (req, resp) {
              data : contact
          }))
        .catch((error)=>resp.send(error));
-        // resp.send("new")
       }
       else{
         return resp.status(403).send({
@@ -42,7 +28,7 @@ router.post("/addContact", JSONParsermid, function (req, resp) {
 })
 
 //2nd API "LIST ALL CONTACTS"...
-router.post("/getList", JSONParsermid, function (req, resp) {
+router.post("/getList",function (req, resp) {
   const pageNum = req.body.pageNum;
     const character = req.body.character;
 
@@ -56,7 +42,7 @@ router.post("/getList", JSONParsermid, function (req, resp) {
 })
 
 //3rd API "LIST RECENT 5 CONTACTS"...
-router.post("/getRecentList", JSONParsermid, function (req, resp) {
+router.post("/getRecentList",function (req, resp) {
   ContactsModel.getTopContacts(req.body)
   .then((contacts)=>resp.send({
         statusCode : 200,

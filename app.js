@@ -14,8 +14,10 @@ const JSONParsermid = bodyParser.json();
 const mongoose = require('mongoose')
 mongoose.connect("mongodb://localhost:27017/contactList")
 
-//require auth file
-const validUsers = require('./auth');
+
+//require middlewares..
+const authMid = require('./mid/auth')
+const urlMid = require ('./mid/url')
 
 // require all models
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
@@ -23,48 +25,15 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 })
 
 //middleware for authorization..
-server.use(JSONParsermid,(req,resp,next)=>{
-  var flag=0;
-  if(req.body.auth && req.body.deviceToken &&  req.body.fingerPrint){
-    console.log("hii");
-    validUsers.forEach(function(value){
-      if(req.body.auth === value.auth &&
-         req.body.deviceToken === value.deviceToken
-         && req.body.fingerPrint === value.fingerPrint){
-        req.body.userId = value.userId
-         next()
-        }
-        else{
-          flag++
-        }
+server.use(JSONParsermid,authMid)
 
-    })
-    if (flag === validUsers.length){
-      return resp.status(403).send({
-          success: false,
-          message: 'The User is not Authorized.'
-      })
-      ;}
-  }
-  else{
-    return resp.status(403).send({
-        success: false,
-        message: 'Not Authorized.'
-    });
-  }
-})
 
 //route to 3 APIS
 var contactsRouter = require("./controllers/contacts")
 server.use("/contacts", contactsRouter)
 
 //middleware to catch error URLS
-server.use((req,resp,next)=>{
-  resp.status(404).send({
-        statusCode : 404,
-        message : 'The page you requested does not exist'
-    });
-})
+server.use(urlMid)
 
 server.listen(3000,function(){
   console.log("start server in http at port 3000");
