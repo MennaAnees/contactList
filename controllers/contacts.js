@@ -23,7 +23,11 @@ router.post("/addContact", JSONParsermid, function (req, resp) {
   .then((data)=>{
      if(data.length === 0){
        ContactsModel.addContact(req.body)
-       .then((data)=>resp.send(data))
+       .then((contact)=>resp.send({
+             statusCode : 200,
+             message : "Contact added successfuly.",
+             data : contact
+         }))
        .catch((error)=>resp.send(error));
         // resp.send("new")
       }
@@ -35,22 +39,30 @@ router.post("/addContact", JSONParsermid, function (req, resp) {
       }
     })
   .catch((error)=>resp.send(error));
-  // ContactsModel.addContact(req.body)
-  // .then((data)=>resp.send(data))
-  // .catch((error)=>resp.send(error));
 })
 
 //2nd API "LIST ALL CONTACTS"...
 router.post("/getList", JSONParsermid, function (req, resp) {
-  ContactsModel.listContacts(req.body)
-  .then((data)=>resp.send(data))
+  const pageNum = req.body.pageNum;
+    const character = req.body.character;
+
+  ContactsModel.listContacts(req.body.userId, pageNum , character)
+  .then((contacts)=>resp.send({
+        statusCode : 200,
+        message : "List Contacts successfully.",
+        data : contacts
+    }))
   .catch((error)=>resp.send(error));
 })
 
 //3rd API "LIST RECENT 5 CONTACTS"...
 router.post("/getRecentList", JSONParsermid, function (req, resp) {
   ContactsModel.getTopContacts(req.body)
-  .then((data)=>resp.send(data))
+  .then((contacts)=>resp.send({
+        statusCode : 200,
+        message : "List Recent Contacts successfully.",
+        data : contacts
+    }))
   .catch((error)=>resp.send(error));
 })
 

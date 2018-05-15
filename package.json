@@ -4,7 +4,7 @@
   "description": "simple NodeJS 3 apis",
   "main": "app.js",
   "scripts": {
-    "start":"nodemon app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/MennaAnees/contactList/issues"
   },
-  "homepage": "https://github.com/MennaAnees/contactList#readme"
+  "homepage": "https://github.com/MennaAnees/contactList#readme",
+  "dependencies": {
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-validator": "^2.0.2"
+  }
 }
