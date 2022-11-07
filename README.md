@@ -18,10 +18,10 @@ to run the project on your local machine follow the steps:
 
 
   3. To Run server :
-    - npm start
+   - npm start
 
   4. To Run mochaTest :
-    - npm test
+   - npm test
 
 ### Description of 3 APIS:
 - 1st API: ADD NEW CONTACT
