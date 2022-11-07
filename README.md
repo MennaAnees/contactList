@@ -7,14 +7,14 @@
 ### Getting started
 to run the project on your local machine follow the steps:
   1. Prerequisites:  
-    - node v8.10.0
-    - mongodb v3.2.19
+   - node v8.10.0
+   - mongodb v3.2.19
 
   2. To Install:
-    - clone the repo
-    - inside the project run : npm install
-    - create a database named : contactList
-    - run the mongod server with --auth option : mongod --auth
+   - clone the repo
+   - inside the project run : npm install
+   - create a database named : contactList
+   - run the mongod server with --auth option : mongod --auth
 
 
   3. To Run server :
